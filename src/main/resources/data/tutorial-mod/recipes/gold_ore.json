@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["AAA", "ABA", "AAA"],
+  "key": {
+    "A": {
+      "item": "minecraft:cobblestone"
+    },
+    "B": {
+      "item": "minecraft:raw_gold"
+    }
+  },
+  "result": {
+    "item": "minecraft:gold_ore",
+    "count": 1
+  }
+}

@@ -9,6 +9,6 @@ public class CollectionMod implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initializing Collection7685...");
-        OreDispense.init();
+        new OreDispense().init();
     }
 }

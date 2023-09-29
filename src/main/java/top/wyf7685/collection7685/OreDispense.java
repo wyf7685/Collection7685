@@ -12,16 +12,15 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.event.GameEvent;
-import org.slf4j.Logger;
 
 public class OreDispense extends BaseModule {
 
-    public static void init() {
+    public void init() {
         LOGGER.info("Initializing module OreDispense...");
         initDispenserBehavior();
         LOGGER.info("Initialize module OreDispense finished.");
     }
-    public static void registerOreDispense(Item item, Block block) {
+    public void registerOreDispense(Item item, Block block) {
         DispenserBlock.registerBehavior(item, new FallibleItemDispenserBehavior() {
             @Override
             protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
@@ -42,7 +41,7 @@ public class OreDispense extends BaseModule {
         LOGGER.info("Register dispenser behavior for Block" + block.getName());
     }
 
-    public static void initDispenserBehavior() {
+    public void initDispenserBehavior() {
         // Coal Ore
         registerOreDispense(Items.COAL_ORE, Blocks.COAL_ORE);
         registerOreDispense(Items.DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COAL_ORE);
