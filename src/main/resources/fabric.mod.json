@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "collection7685",
+	"version": "${version}",
+	"name": "Collection7685",
+	"description": "The collection of wyf7685's ideas",
+	"authors": [
+		"wyf7685"
+	],
+	"contact": {
+		"homepage": "https://github.com/wyf7685",
+		"sources": "https://github.com/wyf7685/Collection7685"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/collection7685/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"top.wyf7685.collection7685.CollectionMod"
+		],
+		"client": [
+			"top.wyf7685.collection7685.ExampleModClient"
+		],
+		"fabric-datagen": []
+	},
+	"mixins": [
+		"collection7685.mixins.json",
+		{
+			"config": "collection7685.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.22",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
