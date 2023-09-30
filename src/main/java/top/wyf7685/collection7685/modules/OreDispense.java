@@ -1,4 +1,4 @@
-package top.wyf7685.collection7685;
+package top.wyf7685.collection7685.modules;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,30 +12,33 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.event.GameEvent;
+import top.wyf7685.collection7685.Config;
 
 public class OreDispense extends BaseModule {
-
-    public void init() {
-        LOGGER.info("Initializing module OreDispense...");
+    public void onInit() {
         initDispenserBehavior();
-        LOGGER.info("Initialize module OreDispense finished.");
     }
+    public boolean doOreDispense() {return Config.doOreDispense;}
     public void registerOreDispense(Item item, Block block) {
         DispenserBlock.registerBehavior(item, new FallibleItemDispenserBehavior() {
             @Override
             protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-                ServerWorld world = pointer.getWorld();
-                Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
-                BlockPos blockPos = pointer.getPos().offset(direction);
-                if (world.isAir(blockPos)) {
-                    world.setBlockState(blockPos, block.getDefaultState());
-                    world.emitGameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
-                    stack.decrement(1);
-                    setSuccess(true);
+                if (doOreDispense()) {
+                    ServerWorld world = pointer.getWorld();
+                    Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
+                    BlockPos blockPos = pointer.getPos().offset(direction);
+                    if (world.isAir(blockPos)) {
+                        world.setBlockState(blockPos, block.getDefaultState());
+                        world.emitGameEvent(null, GameEvent.BLOCK_PLACE, blockPos);
+                        stack.decrement(1);
+                        setSuccess(true);
+                    } else {
+                        setSuccess(false);
+                    }
+                    return stack;
                 } else {
-                    setSuccess(false);
+                    return super.dispenseSilently(pointer, stack);
                 }
-                return stack;
             }
         });
         LOGGER.info("Register dispenser behavior for Block" + block.getName());
@@ -70,7 +73,5 @@ public class OreDispense extends BaseModule {
         registerOreDispense(Items.NETHER_GOLD_ORE, Blocks.NETHER_GOLD_ORE);
         // Nether Quartz Ore
         registerOreDispense(Items.NETHER_QUARTZ_ORE, Blocks.NETHER_QUARTZ_ORE);
-        // Ancient Debris
-        registerOreDispense(Items.ANCIENT_DEBRIS, Blocks.ANCIENT_DEBRIS);
     }
 }
