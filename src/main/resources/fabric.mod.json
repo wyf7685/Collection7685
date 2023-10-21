@@ -18,18 +18,10 @@
 		"main": [
 			"top.wyf7685.collection7685.CollectionMod"
 		],
-		"client": [
-			"top.wyf7685.collection7685.ExampleModClient"
-		],
+		"client": [],
 		"fabric-datagen": []
 	},
-	"mixins": [
-		"collection7685.mixins.json",
-		{
-			"config": "collection7685.client.mixins.json",
-			"environment": "client"
-		}
-	],
+	"mixins": [],
 	"depends": {
 		"fabricloader": ">=0.14.22",
 		"minecraft": "~1.19.4",
